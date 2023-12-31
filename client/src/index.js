@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./HomePage";
-
+export const URL = 'http://localhost:3000';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -15,8 +15,7 @@ root.render(
         <Route exact path="/" element={
           <HomePage />
         }/>
-        <Route exact path="/login"/>
-        <Route exact path="/signup"/>
+        <Route exact path="/log/:logID"/>
       </Routes>
     </Router>
   </React.StrictMode>
