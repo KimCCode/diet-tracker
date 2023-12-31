@@ -4,9 +4,9 @@ import morgan from 'morgan';
 import config from '../src/config.json';
 import cors from 'cors';
 import errorHandler from 'middleware-http-errors';
-// import { adminRoutes } from './routes/admin';
-// import { logRoutes } from './routes/log';
-// import { entryRoutes } from './routes/entry';
+import { adminRoutes } from './routes/admin';
+import { logRoutes } from './routes/log';
+import { entryRoutes } from './routes/entry';
 require('dotenv').config();
 
 // Set up web app
@@ -22,9 +22,9 @@ const HOST: string = process.env.IP || 'localhost';
 // For logging errors (print to terminal)
 app.use(morgan('dev'));
 
-// app.use('/api/admin', adminRoutes);
-// app.use('/api/log', logRoutes);
-// app.use('/api/entry', entryRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/log', logRoutes);
+app.use('/api/entry', entryRoutes);
 
 // For handling errors
 app.use(errorHandler());
