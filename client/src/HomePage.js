@@ -10,7 +10,7 @@ function HomePage() {
   const [logs, setLogs] = useState([]);
 
   const handleCardClick = (logID) => {
-    navigate(`/entry/${logID}`)
+    navigate(`/log/${logID}`)
   }
   const handleCardDelete = (e, logID) => {
     e.stopPropagation();
