@@ -1,12 +1,13 @@
-import { connectDB } from './db/connection';
+import { connectDB } from './src/db/connection';
 import express, { json, Request, Response } from 'express';
 import morgan from 'morgan';
-import config from '../src/config.json';
+import config from './src/config.json';
 import cors from 'cors';
 import errorHandler from 'middleware-http-errors';
-import { adminRoutes } from './routes/admin';
-import { logRoutes } from './routes/log';
-import { entryRoutes } from './routes/entry';
+import { adminRoutes } from './src/routes/admin';
+import { logRoutes } from './src/routes/log';
+import { entryRoutes } from './src/routes/entry';
+const path = require('path');
 require('dotenv').config();
 
 // Set up web app
@@ -15,13 +16,15 @@ const app = express();
 app.use(json());
 // Use middleware that allows for access from other domains
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 const PORT: number = parseInt(process.env.PORT || config.port);
 const HOST: string = process.env.IP || 'localhost';
 
 // For logging errors (print to terminal)
 app.use(morgan('dev'));
-
 app.use('/api/admin', adminRoutes);
 app.use('/api/log', logRoutes);
 app.use('/api/entry', entryRoutes);
