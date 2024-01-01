@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import SingleLogPage from './SingleLogPage';
+import EditPage from './EditPage';
 
 export const URL = 'http://localhost:3001';
 
@@ -20,6 +21,9 @@ root.render(
         }/>
         <Route exact path="/log/:logID" element={
           <SingleLogPage/>
+        }/>
+        <Route exact path="/entry/:logID/:entryID" element={
+          <EditPage/>
         }/>
       </Routes>
     </Router>

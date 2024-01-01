@@ -50,25 +50,24 @@ const SingleLogPage = () => {
   }, [logID, numEntries]);
 
   return (
-    <section className="Single-Log-Section">
+    <section className="log-section">
       <form className="task-form" onSubmit={handleSubmit}>
-        <div className="form-control">
-          <input
-            type="text"
-            required
-            value={entryName}
-            className="task-input"
-            placeholder="eg. Beef Burger"
-            onChange={(e) => setEntry(e.target.value)}
-          />
-          <input 
-            type="number"
-            required
-            value={calories}
-            onChange={(e) => setCalories(e.target.value)}
-          />
-          <button type="submit" className="btn submit-btn">submit</button>
-        </div>
+        <input
+          type="text"
+          required
+          value={entryName}
+          className="input-field"
+          placeholder="eg. Beef Burger"
+          onChange={(e) => setEntry(e.target.value)}
+        />
+        <input 
+          type="number"
+          required
+          value={calories}
+          className="input-field"
+          onChange={(e) => setCalories(e.target.value)}
+        />
+        <button type="submit" className="submit-btn">submit</button>
       </form>
       <div className="tasks-container">
         <div className="table-title">
