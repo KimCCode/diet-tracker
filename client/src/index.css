@@ -11,3 +11,84 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a {
+  text-decoration: none;
+  color: #262a3b;
+}
+
+/* Navigation bar */
+.navbar {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  border-bottom: 1px solid #C3C6D3;
+  background: #FAFBFF;
+}
+
+/* End of Navigation bar */
+
+/* HomePage */
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: auto;
+  margin: auto;
+  padding: 20px;
+}
+
+.log-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: transform 0.3s;
+  width: 120px;
+  height: 150px;
+  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #f0f2fa;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: #7779861a 0 3px 20px;
+}
+
+.log-card:hover {
+  transform: scale(1.05);
+}
+
+.log-date {
+  color: black;
+  font-weight: bold;
+}
+
+.log-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.calories-container {
+  margin: 5px;
+}
+
+.numEntries-container {
+  margin: 5px;
+}
+
+.trash-icon-container {
+  cursor: pointer;
+}
+
+.default-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* End of HomePage */
