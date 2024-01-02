@@ -5,6 +5,7 @@
     "lint:fix": "eslint --fix .",
     "ts-node": "ts-node",
     "start": "ts-node -T index.ts",
+    "build": "npm i",
     "dev": "ts-node-dev index.ts",
     "coverage:start": "nyc --reporter=text --reporter=lcov ts-node index.ts",
     "coverage:dev": "nyc --reporter=text --reporter=lcov ts-node-dev index.ts"
