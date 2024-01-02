@@ -7,7 +7,6 @@ import errorHandler from 'middleware-http-errors';
 import { adminRoutes } from './src/routes/admin';
 import { logRoutes } from './src/routes/log';
 import { entryRoutes } from './src/routes/entry';
-const path = require('path');
 require('dotenv').config();
 
 // Set up web app
@@ -16,10 +15,6 @@ const app = express();
 app.use(json());
 // Use middleware that allows for access from other domains
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 const PORT: number = parseInt(process.env.PORT || config.port);
 const HOST: string = process.env.IP || 'localhost';
 
