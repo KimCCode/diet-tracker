@@ -8,7 +8,7 @@ import HomePage from './HomePage';
 import SingleLogPage from './SingleLogPage';
 import EditPage from './EditPage';
 
-export const URL = 'http://localhost:10000';
+export const URL = 'https://diet-tracker-rho.vercel.app/';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
