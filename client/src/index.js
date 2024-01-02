@@ -8,7 +8,7 @@ import HomePage from './HomePage';
 import SingleLogPage from './SingleLogPage';
 import EditPage from './EditPage';
 
-export const URL = 'https://diettracker-api.onrender.com';
+export const URL = 'http://localhost:3001';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
