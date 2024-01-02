@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/diet-tracker/static/css/main.f001f217.css",
-    "main.js": "/diet-tracker/static/js/main.18578823.js",
+    "main.js": "/diet-tracker/static/js/main.9fc5f8fb.js",
     "static/js/787.d5fa4d18.chunk.js": "/diet-tracker/static/js/787.d5fa4d18.chunk.js",
     "static/media/fa-solid-900.ttf": "/diet-tracker/static/media/fa-solid-900.45a265d0f07b31cde85f.ttf",
     "static/media/fa-brands-400.ttf": "/diet-tracker/static/media/fa-brands-400.6205fd00fb1b573e9f0f.ttf",
@@ -15,11 +15,11 @@
     "static/media/arrow-left-solid.svg": "/diet-tracker/static/media/arrow-left-solid.522fc530ffa755ea5f40.svg",
     "static/media/check-solid.svg": "/diet-tracker/static/media/check-solid.aa8ba2d16a2edbe434d1.svg",
     "main.f001f217.css.map": "/diet-tracker/static/css/main.f001f217.css.map",
-    "main.18578823.js.map": "/diet-tracker/static/js/main.18578823.js.map",
+    "main.9fc5f8fb.js.map": "/diet-tracker/static/js/main.9fc5f8fb.js.map",
     "787.d5fa4d18.chunk.js.map": "/diet-tracker/static/js/787.d5fa4d18.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f001f217.css",
-    "static/js/main.18578823.js"
+    "static/js/main.9fc5f8fb.js"
   ]
 }
