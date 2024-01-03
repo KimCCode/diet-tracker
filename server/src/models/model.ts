@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import isEmail from 'validator/lib/isEmail.js';
 
 // Interface of the Log Object
@@ -9,7 +9,7 @@ const EntrySchema = new mongoose.Schema({
     minLength: 2,
     maxLength: 50,
   },
-  logID: String,
+  logID: Types.ObjectId,
   quantity: {
     type: Number,
     default: 0,
@@ -30,6 +30,7 @@ const EntrySchema = new mongoose.Schema({
 const EntryDB = mongoose.model('Entry', EntrySchema);
 
 const LogSchema = new mongoose.Schema({
+  ownerID: Types.ObjectId,
   numEntries: {
     type: Number,
     default: 0,
