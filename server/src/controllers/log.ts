@@ -21,7 +21,7 @@ const createLog = (req: Request, res: Response) => {
         if (!user) {
           return res.status(404).json({ msg: `No user with id: ${userID}` });
         }
-    
+
         LogDB.create({ ownerID: userID })
           .then((response) => {
             res.status(201).json({ logID: response._id });
@@ -59,7 +59,7 @@ const getLog = (req: Request, res: Response) => {
           return res.status(404).json({ msg: `No log with id: ${logID}` });
         }
 
-        if (log.ownerID.toString() !== userID) {
+        if (String(log.ownerID) !== userID) {
           return res.status(403).json({ msg: 'User does not have access' });
         }
 
@@ -140,7 +140,7 @@ const viewLogsOwned = async (req: Request, res: Response) => {
           return res.status(404).json({ msg: `No user with id: ${userID}` });
         }
         const logsOwned = await LogDB.find({ ownerID: userID });
-        res.json({ logsOwned } );
+        res.json({ logsOwned });
       } catch (error) {
         return res.status(500).json({ msg: error });
       }

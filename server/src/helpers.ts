@@ -7,8 +7,8 @@ function myHash(string: string) {
 }
 
 function generateToken(userID: Types.ObjectId) {
-  const payload = { userID};
-  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h'});
+  const payload = { userID };
+  return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 }
 export {
   myHash,

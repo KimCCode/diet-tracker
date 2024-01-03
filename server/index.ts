@@ -1,5 +1,5 @@
 import { connectDB } from './src/db/connection';
-import express, { json, Request, Response } from 'express';
+import express, { json } from 'express';
 import morgan from 'morgan';
 import config from './src/config.json';
 import cors from 'cors';

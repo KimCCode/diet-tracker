@@ -4,4 +4,3 @@ export const logRoutes = express.Router();
 
 logRoutes.route('/').post(createLog).get(viewLogsOwned);
 logRoutes.route('/:logID').get(getLog).delete(deleteLog);
-
