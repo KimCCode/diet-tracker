@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './components/Navbar';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import SingleLogPage from './SingleLogPage';
 import EditPage from './EditPage';
@@ -13,7 +13,7 @@ export const URL = 'https://diet-tracker-rho.vercel.app';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <HashRouter>
+    <Router>
       <Navbar />
       <Routes>
         <Route exact path="/" element={
@@ -26,7 +26,7 @@ root.render(
           <EditPage/>
         }/>
       </Routes>
-    </HashRouter>
+    </Router>
   </React.StrictMode>
 );
 

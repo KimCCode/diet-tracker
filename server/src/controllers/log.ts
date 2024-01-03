@@ -1,25 +1,39 @@
 import { EntryDB, LogDB, UserDB } from '../models/model';
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
-const createLog = async (req: Request, res: Response) => {
-  // const { userID } = req.body;
-  try {
-    // Check if user exists
-    // const user = await UserDB.findById(userID);
-    // if (!user) {
-    //   return res.status(404).json({ msg: `No user with id: ${userID}` });
-    // }
-
-    LogDB.create({})
-      .then((response) => {
-        console.log(response);
-        res.status(201).json({ logID: response._id });
-      }).catch(() => {
-        return res.status(404).json({ msg: 'Unable to create new log' });
-      });
-  } catch (error) {
-    return res.status(500).json({ msg: error });
-  }
+const createLog = (req: Request, res: Response) => {
+  const token = req.header('token');
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded: jwt.JwtPayload) => {
+    // Primarily checks if token time has expired
+    if (err) {
+      if (err.name === 'TokenExpiredError') {
+        return res.status(401).json({ msg: 'Token has expired' });
+      } else {
+        return res.status(401).json({ msg: 'Token verification failed' });
+      }
+    } else {
+      console.log(decoded);
+      const userID = decoded.userID;
+      try {
+        // Check if user exists
+        const user = await UserDB.findById(userID);
+        if (!user) {
+          return res.status(404).json({ msg: `No user with id: ${userID}` });
+        }
+    
+        LogDB.create({})
+          .then((response) => {
+            console.log(response);
+            res.status(201).json({ logID: response._id });
+          }).catch(() => {
+            return res.status(404).json({ msg: 'Unable to create new log' });
+          });
+      } catch (error) {
+        return res.status(500).json({ msg: error });
+      }
+    }
+  })
 };
 
 const getLog = async (req: Request, res: Response) => {

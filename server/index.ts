@@ -7,6 +7,7 @@ import errorHandler from 'middleware-http-errors';
 import { adminRoutes } from './src/routes/admin';
 import { logRoutes } from './src/routes/log';
 import { entryRoutes } from './src/routes/entry';
+import cookieParser from 'cookie-parser';
 require('dotenv').config();
 
 // Set up web app
@@ -15,6 +16,8 @@ const app = express();
 app.use(json());
 // Use middleware that allows for access from other domains
 app.use(cors());
+
+app.use(cookieParser());
 const PORT: number = parseInt(process.env.PORT || config.port);
 const HOST: string = process.env.IP || 'localhost';
 
