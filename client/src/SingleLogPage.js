@@ -45,7 +45,7 @@ const SingleLogPage = () => {
       return res.json();
     })
     .then(data => {
-      setEntries(data);
+      setEntries(data.entries);
     })
   }, [logID, numEntries]);
 

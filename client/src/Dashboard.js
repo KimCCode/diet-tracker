@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { URL } from './index';
 import { format } from 'date-fns';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useAuth } from './AuthContext';
 
-function HomePage() {
+function Dashboard() {
   const navigate = useNavigate();
+  const { token } = useAuth();
   const [numLogs, setNumLogs] = useState(0);
   const [logs, setLogs] = useState([]);
 
@@ -14,14 +16,27 @@ function HomePage() {
   }
   const handleCardDelete = (e, logID) => {
     e.stopPropagation();
-    fetch(`${URL}/api/log/${logID}`, {method: 'DELETE'})
+    fetch(`${URL}/api/log/${logID}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
     .then(() => {
       setNumLogs(numLogs - 1);
       console.log('Log deleted!');
+    })
+    .catch(() => {
+      console.log('Unable to delete log')
     });
   }
   const handleDefaultCardClick = () => {
-    fetch(`${URL}/api/log`, {method: 'POST'})
+    fetch(`${URL}/api/log`, {
+      method: 'POST',
+      headers: {
+        'Authorization': token
+      }
+    })
       .then(() => {
         setNumLogs(numLogs + 1);
         console.log('New log added')
@@ -64,4 +79,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Dashboard;

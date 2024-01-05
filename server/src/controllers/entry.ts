@@ -242,7 +242,7 @@ const viewLogEntries = (req: Request, res: Response) => {
           return res.status(404).json({ msg: 'No entry with id' });
         }
 
-        res.json(entries);
+        res.json({ entries });
       } catch (error) {
         return res.status(500).json({ msg: error });
       }

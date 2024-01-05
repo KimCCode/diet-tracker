@@ -4,10 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './HomePage';
+import RegisterPage from './RegisterPage';
+import Dashboard from './Dashboard';
 import SingleLogPage from './SingleLogPage';
 import EditPage from './EditPage';
-
+import LoginPage from './LoginPage';
+import { AuthProvider } from './AuthContext';
 export const URL = 'https://diet-tracker-rho.vercel.app';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,13 +19,25 @@ root.render(
       <Navbar />
       <Routes>
         <Route exact path="/" element={
-          <HomePage />
+          <RegisterPage />
+        }/>
+        <Route exact path="/login" element={
+          <LoginPage />
+        }/>
+        <Route exact path="/dashboard" element={
+          <AuthProvider>
+            <Dashboard />
+          </AuthProvider>
         }/>
         <Route exact path="/log/:logID" element={
-          <SingleLogPage/>
+          <AuthProvider>
+            <SingleLogPage/>
+          </AuthProvider>
         }/>
         <Route exact path="/entry/:logID/:entryID" element={
-          <EditPage/>
+          <AuthProvider>
+            <EditPage />
+          </AuthProvider>
         }/>
       </Routes>
     </Router>

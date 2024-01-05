@@ -220,16 +220,10 @@ a:hover {
   color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: background-image 0.3s ease;
-  background-image: none;
 }
 
 .submit-edit-btn:hover {
   background-color: #0056b3;
-  background-image: url(../public/check-solid.svg);
-  background-repeat: no-repeat;
-  background-position: 8px center;
-  /* padding-right: 30px; */
 }
 
 .back-button-container {

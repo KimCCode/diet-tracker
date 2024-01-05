@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 const createLog = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
 
   jwt.verify(token, process.env.JWT_SECRET, async (err: jwt.VerifyErrors, decoded: jwt.JwtPayload) => {
     // Primarily checks if token time has expired
