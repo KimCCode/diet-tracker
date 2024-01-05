@@ -16,30 +16,26 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={
-          <RegisterPage />
-        }/>
-        <Route exact path="/login" element={
-          <LoginPage />
-        }/>
-        <Route exact path="/dashboard" element={
-          <AuthProvider>
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={
+            <RegisterPage />
+          }/>
+          <Route exact path="/login" element={
+            <LoginPage />
+          }/>
+          <Route exact path="/dashboard/:_id" element={
             <Dashboard />
-          </AuthProvider>
-        }/>
-        <Route exact path="/log/:logID" element={
-          <AuthProvider>
-            <SingleLogPage/>
-          </AuthProvider>
-        }/>
-        <Route exact path="/entry/:logID/:entryID" element={
-          <AuthProvider>
+          }/>
+          <Route exact path="/log/:logID" element={
+              <SingleLogPage/>
+          }/>
+          <Route exact path="/entry/:logID/:entryID" element={
             <EditPage />
-          </AuthProvider>
-        }/>
-      </Routes>
+          }/>
+        </Routes>
+      </AuthProvider>
     </Router>
   </React.StrictMode>
 );

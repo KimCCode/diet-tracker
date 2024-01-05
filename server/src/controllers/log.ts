@@ -24,7 +24,7 @@ const createLog = (req: Request, res: Response) => {
 
         LogDB.create({ ownerID: userID })
           .then((response) => {
-            res.status(201).json({ logID: response._id });
+            res.status(200).json({ logID: response._id });
           }).catch(() => {
             return res.status(404).json({ msg: 'Unable to create new log' });
           });
@@ -36,7 +36,7 @@ const createLog = (req: Request, res: Response) => {
 };
 
 const getLog = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const logID = String(req.params.logID);
 
   jwt.verify(token, process.env.JWT_SECRET, async (err: jwt.VerifyErrors, decoded: jwt.JwtPayload) => {
@@ -72,7 +72,7 @@ const getLog = (req: Request, res: Response) => {
 };
 
 const deleteLog = async (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const logID = String(req.params.logID);
 
   jwt.verify(token, process.env.JWT_SECRET, async (err: jwt.VerifyErrors, decoded: jwt.JwtPayload) => {
@@ -122,8 +122,8 @@ const deleteLog = async (req: Request, res: Response) => {
   });
 };
 
-const viewLogsOwned = async (req: Request, res: Response) => {
-  const token = req.header('token');
+const viewLogsOwned = (req: Request, res: Response) => {
+  const token = req.header('Authorization');
 
   jwt.verify(token, process.env.JWT_SECRET, async (err: jwt.VerifyErrors, decoded: jwt.JwtPayload) => {
     if (err) {

@@ -11,6 +11,20 @@ function Dashboard() {
   const [numLogs, setNumLogs] = useState(0);
   const [logs, setLogs] = useState([]);
 
+  fetch(`${URL}/api/log`, {
+    method: 'GET',
+    headers: {
+      'Authorization': token
+    }
+  })
+  .then(res => { 
+    return res.json();
+  })
+  .then(data => {
+    console.log(data);
+    setLogs(data.logsOwned);
+  })
+
   const handleCardClick = (logID) => {
     navigate(`/log/${logID}`)
   }
@@ -19,7 +33,7 @@ function Dashboard() {
     fetch(`${URL}/api/log/${logID}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': token
       }
     })
     .then(() => {
@@ -37,24 +51,35 @@ function Dashboard() {
         'Authorization': token
       }
     })
-      .then(() => {
+      .then(res => {
+        if (!res.ok) {
+          throw new Error();
+        }
+        return res.json();
+      })
+      .then(data => {
         setNumLogs(numLogs + 1);
-        console.log('New log added')
+        console.log('New log added');
       })
       .catch(() => {
         console.log('Unable to create new log');
       });
   }
 
-  useEffect(() => {
-    fetch(`${URL}/api/log`)
-    .then(res => { 
-      return res.json();
-    })
-    .then(data => {
-      setLogs(data.logsOwned);
-    })
-  }, [numLogs]);
+  // useEffect(() => {
+  //   fetch(`${URL}/api/log`, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Authorization': token
+  //     }
+  //   })
+  //   .then(res => { 
+  //     return res.json();
+  //   })
+  //   .then(data => {
+  //     setLogs(data.logsOwned);
+  //   })
+  // }, [numLogs, token]);
 
   return (
     <div className="content">
