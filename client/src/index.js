@@ -10,7 +10,7 @@ import SingleLogPage from './SingleLogPage';
 import EditPage from './EditPage';
 import LoginPage from './LoginPage';
 import { AuthProvider } from './AuthContext';
-export const URL = 'http://localhost:3001';
+export const URL = 'https://diet-tracker-rho.vercel.app/';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
