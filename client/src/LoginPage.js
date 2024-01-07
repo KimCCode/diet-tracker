@@ -20,8 +20,7 @@ const Login = () => {
       return res.json();
     }).then((data) => {
       saveToken(data.token);
-    
-      navigate(`/dashboard/${data.token}`);
+      navigate(`/dashboard`);
       console.log('Token saved');
     }).catch(() => {
       console.log('Unable to fetch token');
@@ -34,7 +33,7 @@ const Login = () => {
         <input type="text" required className="edit-input-field" value={data.username} onChange={e => setData({...data, username: e.target.value})}/>
         <label>Password</label>
         <input type="password" required className="edit-input-field" value={data.password} onChange={e => setData({...data, password: e.target.value})}/>
-        <button type="submit" className="submit-edit-btn">Create account</button>
+        <button type="submit" className="submit-edit-btn">Login</button>
       </form>
     </section>
   );

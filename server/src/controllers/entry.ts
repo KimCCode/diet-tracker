@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
 const createEntry = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const { entryName, calories } = req.body;
   const logID = req.params.logID;
 
@@ -57,7 +57,7 @@ const createEntry = (req: Request, res: Response) => {
 };
 
 const getEntry = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const logID = req.params.logID;
   const entryID = req.params.entryID;
 
@@ -99,7 +99,7 @@ const getEntry = (req: Request, res: Response) => {
 };
 
 const deleteEntry = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const logID = req.params.logID;
   const entryID = req.params.entryID;
 
@@ -153,7 +153,7 @@ const deleteEntry = (req: Request, res: Response) => {
 };
 
 const updateEntry = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const logID = req.params.logID;
   const entryID = req.params.entryID;
   const { entryName, calories } = req.body;
@@ -210,7 +210,7 @@ const updateEntry = (req: Request, res: Response) => {
 };
 
 const viewLogEntries = (req: Request, res: Response) => {
-  const token = req.header('token');
+  const token = req.header('Authorization');
   const logID = req.params.logID;
 
   jwt.verify(token, process.env.JWT_SECRET, async (err: jwt.VerifyErrors, decoded: jwt.JwtPayload) => {

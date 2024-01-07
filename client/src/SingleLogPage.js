@@ -1,26 +1,53 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { URL } from './index';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useAuth } from './AuthContext';
 
 const SingleLogPage = () => {
   const { logID } = useParams();
-  const [entryName, setEntry] = useState('');
-  const [calories, setCalories] = useState(0);
+  const { token } = useAuth();
+  const defaultState = {entryName: '', calories: 0};
+  const [data, setData] = useState(defaultState);
   const [entries, setEntries] = useState([]);
-  const [numEntries, setNumEntries] = useState(0);
+
+  const fetchEntries = () => {
+    fetch(`${URL}/api/entry/${logID}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': token,
+      }
+    })
+    .then(res => { 
+      if (!res.ok) {
+        throw new Error();
+      }
+      return res.json();
+    })
+    .then(data => {
+      setEntries(data.entries);
+      console.log('successfully fetched entries');
+    })
+    .catch(() => console.log('unable to fetch entries'));
+  }
 
   const handleSubmit = (e) => {
-    const entry = { entryName, calories }
     e.preventDefault();
     fetch(`${URL}/api/entry/${logID}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(entry)
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify(data)
     })
-    .then(() => { 
-      setNumEntries(numEntries + 1);
+    .then(res => { 
+      if (!res.ok) {
+        throw new Error();
+      }
+      setData(defaultState);
+      fetchEntries();
       console.log('New entry added to log');
     })
     .catch(() => {
@@ -29,9 +56,17 @@ const SingleLogPage = () => {
   }
 
   const handleDelete = (logID, entryID) => {
-    fetch(`${URL}/api/entry/${logID}/${entryID}`, {method: 'DELETE'})
-    .then(() => {
-      setNumEntries(numEntries - 1);
+    fetch(`${URL}/api/entry/${logID}/${entryID}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error();
+      }
+      fetchEntries()
       console.log('Deleted entry from log');
     })
     .catch(() => {
@@ -40,14 +75,8 @@ const SingleLogPage = () => {
   }
 
   useEffect(() => {
-    fetch(`${URL}/api/entry/${logID}`)
-    .then(res => { 
-      return res.json();
-    })
-    .then(data => {
-      setEntries(data.entries);
-    })
-  }, [logID, numEntries]);
+    fetchEntries();
+  }, []);
 
   return (
     <section className="log-section">
@@ -55,17 +84,17 @@ const SingleLogPage = () => {
         <input
           type="text"
           required
-          value={entryName}
+          value={data.entryName}
           className="input-field"
           placeholder="eg. Beef Burger"
-          onChange={(e) => setEntry(e.target.value)}
+          onChange={(e) => setData({...data, entryName: e.target.value})}
         />
         <input 
           type="number"
           required
-          value={calories}
+          value={data.calories}
           className="input-field"
-          onChange={(e) => setCalories(e.target.value)}
+          onChange={(e) => setData({...data, calories: e.target.value})}
         />
         <button type="submit" className="submit-btn">submit</button>
       </form>
