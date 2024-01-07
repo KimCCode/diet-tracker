@@ -2,7 +2,7 @@ import { useState } from "react";
 import { URL } from "./index";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
-
+// Issue: User needs to log in again if uses the 'back' history button. How do I keep the user logged in?
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { saveToken } = useAuth();
@@ -29,7 +29,7 @@ const RegisterPage = () => {
     })
   }
   return (
-    <>
+    <section className="log-section">
       <form onSubmit={ handleSubmit } className="edit-task-form">
         <label>Username</label>
         <input type="text" required className="edit-input-field" value={data.username} onChange={e => setData({...data, username: e.target.value})}/>
@@ -39,8 +39,7 @@ const RegisterPage = () => {
         <input type="password" required className="edit-input-field" value={data.password} onChange={e => setData({...data, password: e.target.value})}/>
         <button type="submit" className="submit-edit-btn">Create account</button>
       </form>
-      {localStorage.getItem('token')}
-    </>
+    </section>
   );
 }
 

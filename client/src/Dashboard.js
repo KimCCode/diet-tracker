@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { URL } from './index';
 import { format } from 'date-fns';
@@ -8,26 +8,34 @@ import { useAuth } from './AuthContext';
 function Dashboard() {
   const navigate = useNavigate();
   const { token } = useAuth();
-  const [numLogs, setNumLogs] = useState(0);
   const [logs, setLogs] = useState([]);
 
-  fetch(`${URL}/api/log`, {
-    method: 'GET',
-    headers: {
-      'Authorization': token
-    }
-  })
-  .then(res => { 
-    return res.json();
-  })
-  .then(data => {
-    console.log(data);
-    setLogs(data.logsOwned);
-  })
+  const fetchData = () => {
+    fetch(`${URL}/api/log`, {
+      method: 'GET',
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error();
+      }
+      return res.json();
+    })
+    .then(data => {
+      setLogs(data.logsOwned);
+      console.log('successfully fetched data');
+    })
+    .catch(() => {
+      console.log('unable to fetch data');
+    })
+  }
 
   const handleCardClick = (logID) => {
     navigate(`/log/${logID}`)
   }
+
   const handleCardDelete = (e, logID) => {
     e.stopPropagation();
     fetch(`${URL}/api/log/${logID}`, {
@@ -36,14 +44,18 @@ function Dashboard() {
         'Authorization': token
       }
     })
-    .then(() => {
-      setNumLogs(numLogs - 1);
+    .then(res => {
+      if (!res.ok) {
+        throw new Error()
+      }
+      fetchData();
       console.log('Log deleted!');
     })
     .catch(() => {
       console.log('Unable to delete log')
     });
   }
+
   const handleDefaultCardClick = () => {
     fetch(`${URL}/api/log`, {
       method: 'POST',
@@ -55,32 +67,16 @@ function Dashboard() {
         if (!res.ok) {
           throw new Error();
         }
-        return res.json();
-      })
-      .then(data => {
-        setNumLogs(numLogs + 1);
+        fetchData();
         console.log('New log added');
       })
       .catch(() => {
         console.log('Unable to create new log');
       });
   }
-
-  // useEffect(() => {
-  //   fetch(`${URL}/api/log`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Authorization': token
-  //     }
-  //   })
-  //   .then(res => { 
-  //     return res.json();
-  //   })
-  //   .then(data => {
-  //     setLogs(data.logsOwned);
-  //   })
-  // }, [numLogs, token]);
-
+  useEffect(() => {
+    fetchData()
+  }, [])
   return (
     <div className="content">
       <div className="default-card log-card" onClick={handleDefaultCardClick}>
