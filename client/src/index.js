@@ -10,7 +10,7 @@ import SingleLogPage from './SingleLogPage';
 import EditPage from './EditPage';
 import LoginPage from './LoginPage';
 import { AuthProvider } from './AuthContext';
-export const URL = 'https://diet-tracker-rho.vercel.app/';
+export const URL = 'https://diet-tracker-frontend.vercel.app';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,7 +25,7 @@ root.render(
           <Route exact path="/login" element={
             <LoginPage />
           }/>
-          <Route exact path="/dashboard/:_id" element={
+          <Route exact path="/dashboard" element={
             <Dashboard />
           }/>
           <Route exact path="/log/:logID" element={

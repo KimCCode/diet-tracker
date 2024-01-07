@@ -21,8 +21,7 @@ const RegisterPage = () => {
       return res.json();
     }).then((data) => {
       saveToken(data.token);
-    
-      navigate(`/dashboard/${data.token}`);
+      navigate(`/dashboard`);
       console.log('Token saved');
     }).catch(() => {
       console.log('Unable to fetch token');

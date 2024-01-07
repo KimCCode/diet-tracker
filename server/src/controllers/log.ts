@@ -71,7 +71,7 @@ const getLog = (req: Request, res: Response) => {
   });
 };
 
-const deleteLog = async (req: Request, res: Response) => {
+const deleteLog = (req: Request, res: Response) => {
   const token = req.header('Authorization');
   const logID = String(req.params.logID);
 
