@@ -28,6 +28,7 @@ function Dashboard() {
       console.log('successfully fetched data');
     })
     .catch(() => {
+      navigate('/login');
       console.log('unable to fetch data');
     })
   }
@@ -52,6 +53,7 @@ function Dashboard() {
       console.log('Log deleted!');
     })
     .catch(() => {
+      navigate('/login');
       console.log('Unable to delete log')
     });
   }

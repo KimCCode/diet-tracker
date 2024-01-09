@@ -157,7 +157,7 @@ const updateEntry = (req: Request, res: Response) => {
   const logID = req.params.logID;
   const entryID = req.params.entryID;
   const { entryName, calories } = req.body;
-
+  console.log(calories);
   jwt.verify(token, process.env.JWT_SECRET, async (err: jwt.VerifyErrors, decoded: jwt.JwtPayload) => {
     if (err) {
       if (err.name === 'TokenExpiredError') {
@@ -192,7 +192,7 @@ const updateEntry = (req: Request, res: Response) => {
           calories
         })
           .then(() => {
-            log.calories = log.calories - oldCalories + calories;
+            log.calories = log.calories - oldCalories + parseInt(calories);
             log.save()
               .then(() => {
                 res.json({ status: 'success' });
