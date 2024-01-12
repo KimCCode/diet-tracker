@@ -7,7 +7,7 @@ import { useAuth } from './AuthContext';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { token, removeToken } = useAuth();
   const [logs, setLogs] = useState([]);
 
   const fetchData = () => {
@@ -29,6 +29,7 @@ function Dashboard() {
     })
     .catch(() => {
       navigate('/login');
+      removeToken();
       console.log('unable to fetch data');
     })
   }
@@ -49,11 +50,12 @@ function Dashboard() {
       if (!res.ok) {
         throw new Error()
       }
-      fetchData();
+      setLogs(logs.filter((log) => log._id !== logID))
       console.log('Log deleted!');
     })
     .catch(() => {
       navigate('/login');
+      removeToken();
       console.log('Unable to delete log')
     });
   }
@@ -65,16 +67,35 @@ function Dashboard() {
         'Authorization': token
       }
     })
-      .then(res => {
-        if (!res.ok) {
+    .then(res => {
+      if (!res.ok) {
+        throw new Error();
+      }
+      return res.json()
+    })
+    .then(data => {
+      fetch(`${URL}/api/log/${data.logID}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': token
+        }
+      })
+      .then(res2 => {
+        if (!res2.ok) {
           throw new Error();
         }
-        fetchData();
+        return res2.json()
+      })
+      .then(data2 => {
+        setLogs([...logs, data2.log]);
         console.log('New log added');
       })
-      .catch(() => {
-        console.log('Unable to create new log');
-      });
+    })
+    .catch(() => {
+      navigate('/login');
+      removeToken();
+      console.log('Unable to create new log');
+    });
   }
   useEffect(() => {
     fetchData()
