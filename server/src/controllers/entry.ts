@@ -36,12 +36,12 @@ const createEntry = (req: Request, res: Response) => {
         }
 
         EntryDB.create({ entryName, logID, calories })
-          .then(() => {
+          .then((entry) => {
             log.numEntries += 1;
             log.calories += parseInt(calories);
             log.save()
               .then(() => {
-                res.status(201).json({ status: 'success' });
+                res.status(200).json({ entry });
               })
               .catch(() => {
                 return res.status(400).json({ msg: 'Unable to save data' });

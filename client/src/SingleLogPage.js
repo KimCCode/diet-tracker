@@ -46,8 +46,11 @@ const SingleLogPage = () => {
       if (!res.ok) {
         throw new Error();
       }
+      return res.json()
+    })
+    .then(data => {
       setData(defaultState);
-      fetchEntries();
+      setEntries([...entries, data.entry]);
       console.log('New entry added to log');
     })
     .catch(() => {
@@ -66,7 +69,7 @@ const SingleLogPage = () => {
       if (!res.ok) {
         throw new Error();
       }
-      fetchEntries()
+      setEntries(entries.filter((entry) => entry._id !== entryID));
       console.log('Deleted entry from log');
     })
     .catch(() => {
