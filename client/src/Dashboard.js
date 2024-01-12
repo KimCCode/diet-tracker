@@ -74,22 +74,8 @@ function Dashboard() {
       return res.json()
     })
     .then(data => {
-      fetch(`${URL}/api/log/${data.logID}`, {
-        method: 'GET',
-        headers: {
-          'Authorization': token
-        }
-      })
-      .then(res2 => {
-        if (!res2.ok) {
-          throw new Error();
-        }
-        return res2.json()
-      })
-      .then(data2 => {
-        setLogs([...logs, data2.log]);
-        console.log('New log added');
-      })
+      setLogs([...logs, data.log]);
+      console.log('New log added');
     })
     .catch(() => {
       navigate('/login');

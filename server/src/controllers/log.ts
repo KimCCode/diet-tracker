@@ -24,7 +24,7 @@ const createLog = (req: Request, res: Response) => {
 
         LogDB.create({ ownerID: userID })
           .then((response) => {
-            res.status(200).json({ logID: response._id });
+            res.status(200).json({ log: response });
           }).catch(() => {
             return res.status(404).json({ msg: 'Unable to create new log' });
           });
