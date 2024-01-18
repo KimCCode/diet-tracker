@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="left-link">
-        <p className="logo">Kim's Diet Tracker</p>
+        <p className="logo">DietDoodle</p>
       </div>
       <div className="right-links">
         {token === '' && <Link to="/">Register</Link>}

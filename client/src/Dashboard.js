@@ -9,7 +9,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const { token, removeToken } = useAuth();
   const [logs, setLogs] = useState([]);
-
+  const [pending, setPending] = useState(false);
   const fetchData = () => {
     fetch(`${URL}/api/log`, {
       method: 'GET',
@@ -61,6 +61,7 @@ function Dashboard() {
   }
 
   const handleDefaultCardClick = () => {
+    setPending(true);
     fetch(`${URL}/api/log`, {
       method: 'POST',
       headers: {
@@ -75,6 +76,7 @@ function Dashboard() {
     })
     .then(data => {
       setLogs([...logs, data.log]);
+      setPending(false);
       console.log('New log added');
     })
     .catch(() => {
@@ -105,6 +107,7 @@ function Dashboard() {
             </button>
           </div>
         ))}
+      { pending && <div className="log-card">Adding log...</div>}
     </div>
   );
 }
