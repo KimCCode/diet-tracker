@@ -1,6 +1,6 @@
-# Kim’s Diet Tracker
+# DietDoodle
 
-Kim’s Diet Tracker is a full stack web app built using the MERN (MongoDB, Express.js, React, Node.js) stack. It allows users to track their diet by creating an account, managing logs, and updating entries.
+DietDoodle is a full stack web app built using the MERN (MongoDB, Express.js, React, Node.js) stack. It allows users to track their diet by creating an account, managing logs, and updating entries.
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ Kim’s Diet Tracker is a full stack web app built using the MERN (MongoDB, Expr
 
 ## Demo
 
-Check out the live demo of Kim’s Diet Tracker: [Diet Tracker Web App](https://diet-tracker-frontend.vercel.app)
+Check out the live demo of DietDoodle: [Diet Tracker Web App](https://diet-tracker-frontend.vercel.app)
 
 ## Installation
 
