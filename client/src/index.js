@@ -23,7 +23,7 @@ root.render(
           <Route exact path="/" element={
             <RegisterPage />
           }/>
-          <Route exact path="/login" element={
+          <Route exact path="/loginpage" element={
             <LoginPage />
           }/>
           <Route exact path="/dashboard" element={
