@@ -18,7 +18,6 @@ root.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        <Navbar />
         <Routes>
           <Route exact path="/" element={
             <RegisterPage />
