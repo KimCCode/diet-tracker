@@ -18,11 +18,12 @@ root.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
+        <Navbar />
         <Routes>
           <Route exact path="/" element={
             <RegisterPage />
           }/>
-          <Route exact path="/loginpage" element={
+          <Route exact path="/login" element={
             <LoginPage />
           }/>
           <Route exact path="/dashboard" element={
